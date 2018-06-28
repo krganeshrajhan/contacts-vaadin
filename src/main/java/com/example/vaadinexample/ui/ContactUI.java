@@ -23,11 +23,12 @@ public class ContactUI extends UI {
     Panel panel = new Panel("Contacts");
     HorizontalSplitPanel hs = new HorizontalSplitPanel();
     Grid<Contact> grid = new Grid<>(Contact.class);
-    ContactView view = new ContactView(
+    /*ContactView view = new ContactView(
             contact -> saveContact(contact),
             contact -> clearContact(contact),
             contact -> removeContact(contact)
-    );
+    );*/
+    ContactForm contactForm = new ContactForm(this);
 
     public void removeContact(Contact contact) {
         contactRepository.delete(contact);
@@ -40,9 +41,9 @@ public class ContactUI extends UI {
 
     public void clearContact(Contact contact) {
         List<Contact> origins = contactRepository.findByIdOrderById(contact.getId());
-        if(!origins.isEmpty()) {
+        /*if(!origins.isEmpty()) {
             setContact(origins.get(0));
-        }
+        }*/
     }
 
     private void saveContact(Contact contact) {
@@ -62,9 +63,9 @@ public class ContactUI extends UI {
 
 
         add.setIcon(VaadinIcons.PLUS);
-        add.addClickListener(e -> {
+        /*add.addClickListener(e -> {
             view.setContact(new Contact());
-        });
+        });*/
 
         panel.setSizeFull();
         hs.setSizeFull();
@@ -73,22 +74,23 @@ public class ContactUI extends UI {
         vl.addComponent(grid);
         grid.setColumns("firstName", "lastName");
         listContacts();
+
         hs.setFirstComponent(vl);
 
 
-        hs.setSecondComponent(view);
-        grid.asSingleSelect().addValueChangeListener(e -> {
+        hs.setSecondComponent(contactForm);
+        /*grid.asSingleSelect().addValueChangeListener(e -> {
             setContact(e.getValue());
-        });
+        });*/
 
         panel.setContent(hs);
         setContent(panel);
 
     }
 
-    public void setContact(Contact value) {
+    /*public void setContact(Contact value) {
         view.setContact(value);
-    }
+    }*/
 
     private void listContacts() {
         grid.setItems(getAllContacts());
