@@ -23,4 +23,12 @@ public class ContactService {
     public List<Contact> findAll() {
         return  contactRepository.findAll();
     }
+
+    public void delete(Contact contact) {
+        contactRepository.delete(contact);
+    }
+
+    public List<Contact> findByIdOrderById(Long id) {
+        return contactRepository.findByIdOrderById(id);
+    }
 }
