@@ -4,15 +4,8 @@ import com.example.vaadinexample.model.Contact;
 import com.example.vaadinexample.service.ContactService;
 import com.vaadin.data.Binder;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -29,6 +22,8 @@ public class ContactForm extends FormLayout {
     private ContactUI contactUI;
     private Binder<Contact> binder = new Binder<>(Contact.class);
     private Contact contact;
+    private final VerticalLayout popupWindow = new VerticalLayout();
+    private PopupView confirm = new PopupView("Confirm", popupWindow);
 
     @Autowired
     private ContactService contactService;
@@ -52,36 +47,57 @@ public class ContactForm extends FormLayout {
         binder.addValueChangeListener(e -> {
             cancel.setVisible(true);
         });
+        confirm.setPopupVisible(false);
+        confirm.addPopupVisibilityListener(e -> {
+        });
     }
 
     public void setContact(Contact contact) {
         this.contact = contact;
         binder.setBean(contact);
-        delete.setVisible(contact.getId()!=null);
+        delete.setVisible(contact.getId() != null);
         cancel.setVisible(false);
         setVisible(true);
     }
 
     public void save() {
-        System.out.println(contactService +" "+contact);
+        System.out.println(contactService + " " + contact);
         contactUI.getContactService().save(contact);
         contactUI.updateContacts();
         setVisible(false);
     }
 
     public void cancel() {
-        if(contact.getId()!=null) {
+
+        if (contact.getId() != null) {
             List<Contact> contacts = contactUI.getContactService().findByIdOrderById(contact.getId());
             binder.setBean(contacts.get(0));
         } else {
             binder.setBean(new Contact());
         }
         cancel.setVisible(false);
+
     }
 
     public void delete() {
-        contactUI.getContactService().delete(contact);
-        contactUI.updateContacts();
-        setVisible(false);
+
+        final Window sub = new Window("Confirm");
+        sub.setModal(true);
+        sub.setResizable(false);
+        sub.setClosable(false);
+        sub.setWidth(300.0f, Unit.PIXELS);
+        sub.setHeight(300.0f, Unit.PIXELS);
+        sub.center();
+        VerticalLayout content = new VerticalLayout();
+        content.addComponent(new Label("Are you sure, you want to remove?"));
+        content.addComponent(new Button("Ok", e -> {
+            contactUI.getContactService().delete(contact);
+            contactUI.updateContacts();
+            setVisible(false);
+            sub.close();
+        }));
+        sub.setContent(content);
+
+        UI.getCurrent().addWindow(sub);
     }
 }
