@@ -1,7 +1,9 @@
 package com.example.vaadinexample;
 
 import com.example.vaadinexample.model.Contact;
+import com.example.vaadinexample.model.Country;
 import com.example.vaadinexample.repository.ContactRepository;
+import com.example.vaadinexample.repository.CountryRepository;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -21,12 +23,17 @@ public class VaadinExampleApplication {
 	@Autowired
 	private ContactRepository contactRepository;
 
+	@Autowired
+	private CountryRepository countryRepository;
+
 
 
 	@Bean
 	public CommandLineRunner loadData() {
 		return (args -> {
-			contactRepository.save(new Contact(null, "Ganeshrajhan", "Rajarethinam"));
+			Country country = countryRepository.save(new Country(null,"India", "+91", "IN"));
+
+			contactRepository.save(new Contact(null, "Ganeshrajhan", "Rajarethinam", "krganeshrajhan@gmail.com", 98254760, country));
 		});
 	}
 }

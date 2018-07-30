@@ -5,6 +5,7 @@ import com.example.vaadinexample.model.Contact;
 import com.example.vaadinexample.repository.ContactRepository;
 import com.example.vaadinexample.service.ContactService;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -18,6 +19,7 @@ import static com.example.vaadinexample.constants.ContactConstants.FIRST_NAME;
 import static com.example.vaadinexample.constants.ContactConstants.LAST_NAME;
 
 @SpringUI
+@Title("Contacts")
 @Theme("valo")
 public class ContactUI extends UI {
 

@@ -7,6 +7,7 @@ import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.Email;
 import java.util.List;
 
 import static com.vaadin.ui.themes.ValoTheme.BUTTON_DANGER;
@@ -65,6 +66,7 @@ public class ContactForm extends FormLayout {
         contactUI.getContactService().save(contact);
         contactUI.updateContacts();
         setVisible(false);
+        Notification.show("Contact Saved");
     }
 
     public void cancel() {
@@ -95,6 +97,7 @@ public class ContactForm extends FormLayout {
             contactUI.updateContacts();
             setVisible(false);
             sub.close();
+            Notification.show("Contact Removed");
         }));
         sub.setContent(content);
 
