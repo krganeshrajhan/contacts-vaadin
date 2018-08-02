@@ -18,6 +18,7 @@ public class Contact {
     @GeneratedValue
     private Long id;
 
+    @NotNull(message = "Enter a value")
     private String firstName;
 
     @NotNull
