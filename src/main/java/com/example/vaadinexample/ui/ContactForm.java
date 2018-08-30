@@ -88,7 +88,7 @@ public class ContactForm extends FormLayout {
         sub.setResizable(false);
         sub.setClosable(false);
         sub.setWidth(300.0f, Unit.PIXELS);
-        sub.setHeight(300.0f, Unit.PIXELS);
+        sub.setHeight(150.0f, Unit.PIXELS);
         sub.center();
         VerticalLayout content = new VerticalLayout();
         content.addComponent(new Label("Are you sure, you want to remove?"));

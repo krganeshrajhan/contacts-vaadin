@@ -30,6 +30,8 @@ public class ContactUI extends UI {
     private Grid<Contact> grid = new Grid<>(Contact.class);
     private ContactForm contactForm = new ContactForm(this);
 
+    private Panel logoPanel = new Panel();
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
@@ -39,8 +41,12 @@ public class ContactUI extends UI {
         grid.setColumns("firstName", "lastName");
         layout1.addComponents(grid,contactForm);
 
+        logoPanel.setWidth("5%");
+        logoPanel.setHeight("5%");
+        logoPanel.setContent(new Label("Lo"));
+
         updateContacts();
-        main.addComponents(add, layout1);
+        main.addComponents(/*logoPanel,*/add, layout1);
         setContent(main);
 
         contactForm.setVisible(false);
