@@ -18,7 +18,7 @@ import java.util.List;
 import static com.example.vaadinexample.constants.ContactConstants.FIRST_NAME;
 import static com.example.vaadinexample.constants.ContactConstants.LAST_NAME;
 
-@SpringUI(path = "")
+@SpringUI(path = "/contact")
 @Title("Contacts")
 @Theme("valo")
 public class ContactUI extends UI {
