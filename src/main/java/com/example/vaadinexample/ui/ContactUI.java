@@ -4,6 +4,8 @@ import com.example.vaadinexample.constants.ContactConstants;
 import com.example.vaadinexample.model.Contact;
 import com.example.vaadinexample.repository.ContactRepository;
 import com.example.vaadinexample.service.ContactService;
+import com.example.vaadinexample.ui.menu.MenuForm;
+import com.example.vaadinexample.ui.menu.MenuFormFactory;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.icons.VaadinIcons;
@@ -26,6 +28,10 @@ public class ContactUI extends UI {
     @Autowired
     @Getter
     private ContactService contactService;
+
+    @Autowired
+    private MenuFormFactory menuFormFactory;
+
     private Button add = new Button("Add");
     private Grid<Contact> grid = new Grid<>(Contact.class);
     private ContactForm contactForm = new ContactForm(this);
@@ -36,6 +42,7 @@ public class ContactUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
 
         VerticalLayout main = new VerticalLayout();
+        Component menu = menuFormFactory.createComponent();
         HorizontalLayout layout1 = new HorizontalLayout();
 
         grid.setColumns("firstName", "lastName");
@@ -46,7 +53,7 @@ public class ContactUI extends UI {
         logoPanel.setContent(new Label("Lo"));
 
         updateContacts();
-        main.addComponents(/*logoPanel,*/add, layout1);
+        main.addComponents(/*logoPanel,*/menu,add, layout1);
         setContent(main);
 
         contactForm.setVisible(false);
