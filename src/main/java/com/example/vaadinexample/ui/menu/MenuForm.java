@@ -7,6 +7,9 @@ import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 public class MenuForm implements BaseForm {
 
@@ -61,8 +64,8 @@ public class MenuForm implements BaseForm {
     }
 
     private void logoutCall() {
-        ui.getSession().close();
-        ui.getNavigator().navigateTo("/login");
+        SecurityContextHolder.clearContext();
+        UI.getCurrent().getPage().setLocation("/contact");
     }
 
     @Override
