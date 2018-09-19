@@ -58,7 +58,7 @@ public class MenuForm implements BaseForm {
         help.addItem("About", setPageCommand);
         logout = new Button("Logout");
         logout.setIcon(VaadinIcons.POWER_OFF);
-        logout.setStyleName(ValoTheme.BUTTON_PRIMARY);
+        logout.setStyleName(ValoTheme.BUTTON_DANGER);
         logout.addClickListener(e -> logoutCall());
         return this;
     }
@@ -70,7 +70,7 @@ public class MenuForm implements BaseForm {
 
     @Override
     public Component layout() {
-        menuLayout.addComponent(menu);
+//        menuLayout.addComponent(menu);
         menuLayout.addComponent(logout);
         menuLayout.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
         return menuLayout;
