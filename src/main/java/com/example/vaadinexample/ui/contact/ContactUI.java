@@ -36,7 +36,7 @@ public class ContactUI extends UI {
         Component menu = menuFormFactory.createComponent();
         HorizontalLayout layout1 = new HorizontalLayout();
 
-        grid.setColumns("firstName", "lastName");
+        grid.setColumns("firstName", "lastName", "dob");
         layout1.addComponents(grid,contactForm);
 
         logoPanel.setWidth("5%");

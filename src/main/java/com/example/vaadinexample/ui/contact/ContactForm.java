@@ -16,6 +16,7 @@ public class ContactForm extends FormLayout {
 
     private TextField firstName = new TextField("First Name");
     private TextField lastName = new TextField("Last Name");
+    private DateField dob = new DateField("Date of Birth");
     private Button save = new Button("Save");
     private Button cancel = new Button("Cancel");
     private Button delete = new Button("Delete");
@@ -31,7 +32,7 @@ public class ContactForm extends FormLayout {
     public ContactForm(ContactUI contactUI) {
         this.contactUI = contactUI;
         HorizontalLayout buttons = new HorizontalLayout(save, cancel, delete);
-        addComponents(firstName, lastName, buttons);
+        addComponents(firstName, lastName, dob, buttons);
         binder.bindInstanceFields(this);
 
         save.setStyleName(BUTTON_PRIMARY);
